@@ -2,7 +2,7 @@ import * as React from 'react';
 import Ringside from 'ringside';
 
 export default class RingsideDemo extends React.Component {
-  state = { tooltipTop: 0, tooltipLeft: 0 };
+  state = { top: 0, left: 0 };
   private tooltipEdge = 40;
   private outerRef = React.createRef<HTMLDivElement>();
   private innerRef = React.createRef<HTMLDivElement>();
@@ -27,14 +27,14 @@ export default class RingsideDemo extends React.Component {
       const randomPosition =
         fitPositions[Math.floor(Math.random() * fitPositions.length)];
 
-      this.setState({
-        tooltipTop: randomPosition.top,
-        tooltipLeft: randomPosition.left
-      });
+      const { top, left } = randomPosition;
+      this.setState({ top, left });
     }
   };
 
   public render() {
+    const { top, left } = this.state;
+
     return (
       <div
         className="outer"
@@ -65,8 +65,8 @@ export default class RingsideDemo extends React.Component {
             position: 'absolute',
             height: this.tooltipEdge,
             width: this.tooltipEdge,
-            top: this.state.tooltipTop,
-            left: this.state.tooltipLeft
+            top,
+            left
           }}
         />
       </div>
